@@ -1,0 +1,10 @@
+.person{
+    padding: 5px;
+    margin-bottom: 10px;
+    border: 1px solid silver;
+    cursor: pointer;
+}
+
+.person:hover{
+    border: 1px solid #0099ff;
+}

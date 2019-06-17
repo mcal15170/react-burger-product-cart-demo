@@ -1,0 +1,9 @@
+export const TYPE_INC = "TYPE_INC";
+export const TYPE_DESC = "TYPE_DESC";
+export const ADD_INC = "ADD_INC";
+export const SUB_DESC = "SUB_DESC";
+export const TYPE_HIDE_SHOW_LIST = "TYPE_HIDE_SHOW_LIST";
+export const DELETE_PERSON = "DELETE_PERSON";
+export const UPDATE_NAME = "UPDATE_NAME";
+export const ADD_PRODUCT_TO_CART = "ADD_PRODUCT_TO_CART";
+export const REMOVE_PRODUCT_FROM_CART = "REMOVE_PRODUCT_FROM_CART ";
