@@ -1,7 +1,8 @@
-import React, { useState,useContext } from "react";
+import React, { useState,useContext,useRef } from "react";
 import studContext from "../../context/studContext";
 
 const StudForm = () => {
+  const txtNameRef=useRef(null);
   const [stud, setStud] = useState({ fName: "", lName: "" });
   const context=useContext(studContext)
 
@@ -19,6 +20,7 @@ const StudForm = () => {
 
     context.addStudent(newStud);
     setStud({ fName: "", lName: "" });
+    txtNameRef.current.focus();
   };
   return (
     <div className="col-md-4">
@@ -30,6 +32,7 @@ const StudForm = () => {
           onChange={onChangeHandller}
           placeholder="Enter Name"
           name="fName"
+          ref={txtNameRef}
           value={stud.fName}
         />
         <input

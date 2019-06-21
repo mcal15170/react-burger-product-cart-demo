@@ -2,10 +2,6 @@ import React, { Component } from "react";
 import "./ProductList.css";
 
 class ProductList extends Component {
- 
-
-  
- 
   render() {
     return (
       <>
@@ -21,8 +17,8 @@ class ProductList extends Component {
                 Total Product : {this.props.items.length}
               </div>
               <div className="col-md-4">
-                Payment Price : {this.props.type==="cart"?this.props.totalPrice:"" }
-               
+                Payment Price :{" "}
+                {this.props.type === "cart" ? this.props.totalPrice : ""}
               </div>
             </div>
           </div>
@@ -47,11 +43,13 @@ class ProductList extends Component {
                           ? item.price * item.quantity
                           : item.price}
                       </div>
-                      <div className="col-md-12 mb-1">
-                        <i className="fa fa-shopping-cart" />
-                        &nbsp;
-                        {this.props.type === "cart" ? item.quantity : ""}
-                      </div>
+
+                      {this.props.type === "cart" && (
+                        <div className="col-md-12 mb-1">
+                          <i className="fa fa-shopping-cart" />
+                          &nbsp;{item.quantity}
+                        </div>
+                      )}
                     </div>
                     <div className="col-md-6 mb-2">
                       <p>

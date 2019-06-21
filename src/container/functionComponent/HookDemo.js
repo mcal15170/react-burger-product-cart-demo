@@ -1,6 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useReducer } from "react";
 
 export default function HookDemo() {
+  // useRef
+  const inputRef = useRef();
+  // userState
   const [counter, setCounter] = useState(0);
   const [friut, setFriut] = useState("apple");
   const [works, setWork] = useState({
@@ -10,18 +13,44 @@ export default function HookDemo() {
       { id: "w3", text: "work about project", status: 0 }
     ]
   });
-
   const [posts, setPosts] = useState([]);
 
+  //end useState
+
+  // useEffect
   useEffect(() => {
     console.log("useEffect");
     const interval = setInterval(() => setCounter(0), 5000);
     return () => {
       clearInterval(interval);
-      console.log('return useEffect');
-      
+      console.log("return useEffect");
+    };
+  }, [counter, friut]);
+
+  //end useEffect
+
+  // useReducer
+
+  const [items, dispatch] = useReducer((state, action) => {
+    switch (action.type) {
+      case "ADD":
+        return [
+          ...state,
+          {
+            id: state.length,
+            title: action.title
+          }
+        ];
+
+      case "REMOVE_BY_ID":
+        return state.filter((_, index) => index != action.id);
+        case 'CLEAR':
+          return [];
     }
-  },[counter,friut]);
+  }, []);
+
+  //end useReducer
+  const updateValue = [1, 0];
 
   const updateStatus = id => {
     setWork({
@@ -30,10 +59,17 @@ export default function HookDemo() {
     });
   };
 
-  const updateValue = [1, 0];
+  const handlerSubmit = event => {
+    event.preventDefault();
+    dispatch({
+      type: "ADD",
+      title: inputRef.current.value
+    });
+    inputRef.current.value = "";
+  };
 
   return (
-    <div>
+    <div className="container">
       {console.log("render")}
       <h2>Counter : {counter}</h2>
       <button
@@ -79,6 +115,28 @@ export default function HookDemo() {
           </p>
         ))}
       </div>
+
+      <h2>userReducer + useRef</h2>
+      <form onSubmit={handlerSubmit}>
+        <input ref={inputRef} />
+      </form>
+       <button  onClick={() => {
+              dispatch({ type: "CLEAR"});
+            }}>clear All</button>
+       &nbsp;
+      {items.map((item, i) => (
+        <p key={item.id}>
+          {item.title}
+          &nbsp;
+          <button
+            onClick={() => {
+              dispatch({ type: "REMOVE_BY_ID", id: i });
+            }}
+          >
+            X
+          </button>
+        </p>
+      ))}
     </div>
   );
 }

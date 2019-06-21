@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import ProductList from "./ProductList";
+import CreateProduct from "./CreateProduct";
 import { addProductToCart } from "../../action/product/productAction";
 import { bindActionCreators } from "redux";
 import VanillaToasts from "vanillatoasts";
@@ -21,6 +22,8 @@ class Product extends Component {
     return (
       <div className="container">
         <div className="row m-5">
+          <CreateProduct/>
+          
           <ProductList
             items={this.props.prodList}
             type="product"
